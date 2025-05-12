@@ -88,6 +88,8 @@ public class UserInterface {
         System.out.print("Max: ");
         double max = scanner.nextDouble();
 
+        System.out.println("vin, year, make, model, type, color, odometer, price");
+
         // ArrayList<Vehicle> filteredVehicles = dealership.getVehiclesByPrice(startingPrice, endingPrice);
         ArrayList<Vehicle> filteredVehicles = dealership.vehiclesByPrice(min, max);
 
@@ -105,6 +107,8 @@ public class UserInterface {
 
         String model = scanner.nextLine();
 
+        System.out.println("vin, year, make, model, type, color, odometer, price");
+
         ArrayList<Vehicle> filteredVehicles = dealership.vehiclesByMakeModel(make, model);
         displayVehicles(filteredVehicles);
     }
@@ -117,6 +121,8 @@ public class UserInterface {
         System.out.print("Max: ");
         int max = scanner.nextInt();
 
+        System.out.println("vin, year, make, model, type, color, odometer, price");
+
         ArrayList<Vehicle> filteredVehicles = dealership.vehiclesByYear(min, max);
 
         displayVehicles(filteredVehicles);
@@ -127,6 +133,8 @@ public class UserInterface {
         scanner.nextLine();
         System.out.print("Color: ");
         String color = scanner.nextLine();
+
+        System.out.println("vin, year, make, model, type, color, odometer, price");
 
         ArrayList<Vehicle> filteredVehicles = dealership.vehiclesByColor(color);
         displayVehicles(filteredVehicles);
@@ -140,6 +148,8 @@ public class UserInterface {
         System.out.print("Max: ");
         int max = scanner.nextInt();
 
+        System.out.println("vin, year, make, model, type, color, odometer, price");
+
         ArrayList<Vehicle> filteredVehicles = dealership.vehiclesByMileage(min, max);
 
         displayVehicles(filteredVehicles);
@@ -151,6 +161,8 @@ public class UserInterface {
         System.out.print("Car, truck, SUV, or van? ");
         String type = scanner.nextLine();
 
+        System.out.println("vin, year, make, model, type, color, odometer, price");
+
         ArrayList<Vehicle> filteredVehicles = dealership.vehiclesByType(type);
 
         displayVehicles(filteredVehicles);
@@ -159,6 +171,9 @@ public class UserInterface {
     private void processGetAllVehiclesRequest(){
         ArrayList<Vehicle> vehicles = dealership.getAllVehicles();
         System.out.println("\n---------Printing all vehicles-----------\n");
+
+        System.out.println("vin, year, make, model, type, color, odometer, price");
+
         displayVehicles(vehicles);
     }
     private void processAddVehicleRequest(){
@@ -234,6 +249,8 @@ public class UserInterface {
 
     private void processRemoveVehicleRequest(){
         System.out.println("\n---------Remove a vehicle----------\n");
+        scanner.nextLine();
+
         System.out.print("VIN: ");
         int vin;
 
