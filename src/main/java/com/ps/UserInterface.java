@@ -17,12 +17,17 @@ public class UserInterface {
 
     public void display() {
 
-        System.out.println("Welcome to the dealership program");
-
+        System.out.println("\n" +  Ansi.ANSI_BRIGHT_MAGENTA + Ansi.BOLD +
+                "****************************************" + "\n" +
+                "*                                      *" + "\n" +
+                "*   WELCOME TO THE DEALERSHIP PROGRAM  *" + "\n" +
+                "*                                      *" + "\n" +
+                "****************************************"
+                + Ansi.RESET);
         int mainMenuCommand;
 
         do {
-            System.out.println("1. Get by price");
+            System.out.println("\n1. Get by price");
             System.out.println("2. Get by make/model");
             System.out.println("3. Get by year");
             System.out.println("4. Get by color");
@@ -33,8 +38,9 @@ public class UserInterface {
             System.out.println("9. Remove vehicle");
             System.out.println("0. Exit");
 
-            System.out.print("Command: ");
+            System.out.print("\nCommand: ");
             mainMenuCommand = scanner.nextInt();
+
 
             switch (mainMenuCommand) {
                 case 1:
@@ -75,7 +81,7 @@ public class UserInterface {
 
 
     private void processGetByPriceRequest() {
-        System.out.println("--------Display vehicles by price--------");
+        System.out.println("\n--------Display vehicles by price--------\n");
         System.out.print("Min: ");
         double min = scanner.nextDouble();
 
@@ -90,7 +96,7 @@ public class UserInterface {
     }
 
     private void processGetByMakeModelRequest() {
-        System.out.println("--------Display vehicles by make and model--------");
+        System.out.println("\n--------Display vehicles by make and model--------\n");
         scanner.nextLine();
         System.out.print("Make: ");
         String make = scanner.nextLine();
@@ -104,7 +110,7 @@ public class UserInterface {
     }
 
     private void processGetByYearRequest() {
-        System.out.println("--------Display vehicles by year--------");
+        System.out.println("\n--------Display vehicles by year--------\n");
         System.out.print("Min: ");
         int min = scanner.nextInt();
 
@@ -117,7 +123,7 @@ public class UserInterface {
     }
 
     private void processGetByColorRequest() {
-        System.out.println("--------Display vehicles by make and model--------");
+        System.out.println("\n--------Display vehicles by color--------\n");
         scanner.nextLine();
         System.out.print("Color: ");
         String color = scanner.nextLine();
@@ -127,7 +133,7 @@ public class UserInterface {
     }
 
     private void processGetByMileageRequest() {
-        System.out.println("--------Display vehicles by mileage--------");
+        System.out.println("\n--------Display vehicles by mileage--------\n");
         System.out.print("Min: ");
         int min = scanner.nextInt();
 
@@ -140,7 +146,7 @@ public class UserInterface {
     }
 
     private void processGetByVehicleTypeRequest() {
-        System.out.println("--------Display vehicles by type--------");
+        System.out.println("\n--------Display vehicles by type--------\n");
         scanner.nextLine();
         System.out.print("Car, truck, SUV, or van? ");
         String type = scanner.nextLine();
@@ -152,15 +158,39 @@ public class UserInterface {
 
     private void processGetAllVehiclesRequest(){
         ArrayList<Vehicle> vehicles = dealership.getAllVehicles();
-        System.out.println("---------Printing all vehicles-----------");
+        System.out.println("\n---------Printing all vehicles-----------\n");
         displayVehicles(vehicles);
     }
     private void processAddVehicleRequest(){
-        System.out.println("---------Add a vehicle----------");
+        System.out.println("\n---------Add a vehicle----------\n");
+        scanner.nextLine();
+
         System.out.print("VIN: ");
-        int vin = scanner.nextInt();
+        int vin;
+        try{
+            vin = Integer.parseInt(scanner.nextLine());
+            if(vin <= 0) {
+                System.out.println("VIN must be a positive number");
+                return;
+            }
+        }catch (NumberFormatException e){
+            System.out.println("VIN must be a number");
+            return;
+        }
+
         System.out.print("Year: ");
-        int year = scanner.nextInt();
+        int year;
+        try{
+            year = Integer.parseInt(scanner.nextLine());
+            if(year <= 0) {
+                System.out.println("Year must be a positive number");
+                return;
+            }
+        }catch (NumberFormatException e){
+            System.out.println("Year must be a number");
+            return;
+        }
+
         System.out.print("Make: ");
         String make = scanner.nextLine();
         System.out.print("Model: ");
@@ -169,10 +199,32 @@ public class UserInterface {
         String type = scanner.nextLine();
         System.out.print("Color: ");
         String color = scanner.nextLine();
+
         System.out.print("Odometer: ");
-        int odometer = scanner.nextInt();
+        int odometer;
+        try{
+            odometer = Integer.parseInt(scanner.nextLine());
+            if(odometer <= 0) {
+                System.out.println("odometer must be a positive number");
+                return;
+            }
+        }catch (NumberFormatException e){
+            System.out.println("odometer must be a number");
+            return;
+        }
+
         System.out.print("Price: ");
-        double price = scanner.nextDouble();
+        double price;
+        try{
+            price = Double.parseDouble(scanner.nextLine());
+            if(price <= 0) {
+                System.out.println("Price must be a positive number");
+                return;
+            }
+        }catch (NumberFormatException e){
+            System.out.println("Price must be a number");
+            return;
+        }
 
         Vehicle addVehicle = new Vehicle(vin, year, make, model, type, color, odometer, price);
         dealership.addVehicle(addVehicle);
@@ -181,9 +233,20 @@ public class UserInterface {
     }
 
     private void processRemoveVehicleRequest(){
-        System.out.println("---------Remove a vehicle----------");
+        System.out.println("\n---------Remove a vehicle----------\n");
         System.out.print("VIN: ");
-        int vin = scanner.nextInt();
+        int vin;
+
+        try{
+            vin = Integer.parseInt(scanner.nextLine());
+            if(vin <= 0) {
+                System.out.println("VIN must be a positive number");
+                return;
+            }
+        }catch (NumberFormatException e){
+            System.out.println("VIN must be a number");
+            return;
+        }
 
         for(Vehicle vehicle : dealership.getAllVehicles()){
             if(vehicle.getVin() == vin){
